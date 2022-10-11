@@ -1,1 +1,0 @@
-flag(password to my bank account is 3142)
