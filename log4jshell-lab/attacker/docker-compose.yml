@@ -30,11 +30,19 @@ services:
       - ldap-server
     networks:
       log4j:
-  workstation2:
+  workstation1:
     build:
       context: .
       dockerfile: DockerfileWS
-    network_mode: bridge
+    networks:
+      log4j:
+  workstation2:
+    build:
+      context: .
+      dockerfile: DockerfileWS2
+    networks:
+      log4j:
+    #network_mode: bridge
 
 networks:
   log4j:

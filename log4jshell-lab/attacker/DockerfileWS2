@@ -1,0 +1,29 @@
+FROM ubuntu:22.04
+
+#Update package list and install ssh
+RUN apt-get update && \
+    apt-get install -y \
+    openssh-server \
+    vsftpd
+
+RUN service ssh start
+
+EXPOSE 22
+
+ARG USER=bob
+ARG UID=1000
+ARG GID=1000
+
+# default password for user
+ARG PW=d0ck3r
+
+
+# Option1: Using unencrypted password/ specifying password
+RUN useradd -m ${USER} --uid=${UID}  --shell /bin/bash && echo "${USER}:${PW}" | \
+     chpasswd
+
+#change root password
+RUN echo 'root:root' | chpasswd
+
+#Run SSH daemon in detached mode
+CMD ["/usr/sbin/sshd","-D"]
