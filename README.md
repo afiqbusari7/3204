@@ -1,6 +1,6 @@
 # 3204
 
-Set up server
+Set up Attack
 cd log4jshell-lab/attacker
 docker-compose build 
 docker-compse up -d 
