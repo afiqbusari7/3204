@@ -19,7 +19,7 @@
 	docker network connect bridge 3204-logstash-1
 	docker network connect bridge 3204-kibana-1
 	docker network connect bridge 3204-elasticsearch-1
-	docker network connect bridge 3204-ssh-ftp
+	docker network connect bridge 3204-sshftp
 
 	docker network disconnect attacker_log4j web-server
 	docker network disconnect attacker_log4j ldap-server
