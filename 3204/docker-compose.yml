@@ -8,3 +8,7 @@ services:
     build: ../3204/VulnerableMamaShop/
     ports:
       - "80:8888"
+  sshftp:
+    build:
+      context: .
+      dockerfile: DockerfileWS

@@ -3,7 +3,7 @@
 
 # run file
 #sudo docker-compose build<br/>
-#sudo docker-coompose up -d 
+#sudo docker-compose up -d 
 
 
 # check IP
@@ -19,6 +19,7 @@
 	docker network connect bridge 3204-logstash-1
 	docker network connect bridge 3204-kibana-1
 	docker network connect bridge 3204-elasticsearch-1
+	docker network connect bridge 3204-ssh-ftp
 
 	docker network disconnect attacker_log4j web-server
 	docker network disconnect attacker_log4j ldap-server
