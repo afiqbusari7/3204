@@ -18,7 +18,7 @@ ARG FTPUID=4000
 ARG FTPGIP=4000
 
 # default password for user
-ARG FTPPW=j0y0fpainting
+ARG FTPPW=joyofpainting
 
 # Using unencrypted password/ specifying password
 RUN useradd -m ${FTPUSER} --uid=${FTPUID}  --shell /bin/bash && echo "${FTPUSER}:${FTPPW}" | chpasswd
