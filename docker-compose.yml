@@ -1,0 +1,13 @@
+version: '3.5'
+
+services:
+  ftpserver:
+    build:
+      context: .
+      dockerfile: DockerfileFTP
+    networks:
+      log4j:
+
+networks:
+  log4j:
+    driver: bridge
