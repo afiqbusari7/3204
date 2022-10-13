@@ -49,18 +49,12 @@ java -cp target/Log4jLabProject-1.0-SNAPSHOT-all.jar com.log4jshell.App '${jndi:
 	sudo docker-compose kill && docker-compose rm -f 
 
 # Network connectivity
-	docker network connect bridge web-server
-	docker network connect bridge ldap-server
-	docker network connect bridge 3204-logstash-1
-	docker network connect bridge 3204-kibana-1
-	docker network connect bridge 3204-elasticsearch-1
+	docker network create --driver=bridge --subnet=192.168.0.0/24 3204_network
 
-	docker network disconnect attacker_log4j web-server
-	docker network disconnect attacker_log4j ldap-server
-	docker network disconnect 3204_elk 3204-logstash-1
-	docker network disconnect 3204_elk 3204-kibana-1
-	docker network disconnect 3204_elk 3204-elasticsearch-1
+	docker network connect --ip 192.168.0.5 3204_network web-server
+	docker network connect --ip 192.168.0.6 3204_network ldap-server
 
-	docker network rm attacker_log4j<br/>
-	docker network rm 3204_elk
+	docker network connect --ip 192.168.0.2 3204_network docker-elk-main-kibana-1
+	docker network connect --ip 192.168.0.3 3204_network docker-elk-main-logstash-1
+	docker network connect --ip 192.168.0.4 3204_network docker-elk-main-elasticsearch-1 
 
