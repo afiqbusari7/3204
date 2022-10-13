@@ -33,7 +33,9 @@ java -cp target/Log4jLabProject-1.0-SNAPSHOT-all.jar com.log4jshell.App '${jndi:
 
 
 
-# 3204
+# ELK Set up
+Clone repository </br>
+https://github.com/deviantony/docker-elk
 
 
 # run file
@@ -58,3 +60,30 @@ java -cp target/Log4jLabProject-1.0-SNAPSHOT-all.jar com.log4jshell.App '${jndi:
 	docker network connect --ip 192.168.0.3 3204_network docker-elk-main-logstash-1
 	docker network connect --ip 192.168.0.4 3204_network docker-elk-main-elasticsearch-1 
 
+# Shell Access
+	docker exec -ti docker-elk-main-kibana-1 /bin/bash
+	docker exec -ti docker-elk-main-logstash-1 /bin/bash
+	docker exec -ti docker-elk-main-elasticsearch-1 /bin/bash
+	docker exec -ti web-server /bin/bash
+	docker exec -ti ldap-server /bin/bash
+	
+# Clean Containers
+	docker system prune -a
+	y
+
+	docker network prune
+	y
+
+	docker container prune
+	y
+
+# Ports
+5044: Logstash Beats input</br>
+50000: Logstash TCP input</br>
+9600: Logstash monitoring API</br>
+9200: Elasticsearch HTTP</br>
+9300: Elasticsearch TCP transport</br>
+5601: Kibana</br>
+
+# filebeat.yml Config
+Copy from repo
