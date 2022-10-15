@@ -2,7 +2,10 @@
 
 
 download jar file 
+
 wget http://18.183.210.2/download/jdk-8u20-linux-x64.tar.gz
+
+
 wget http://18.183.210.2/download/marshalsec-0.0.3-SNAPSHOT-all.jar
 
 put marshalsec-0.0.3-SNAPSHOT-all.jar in target folder 
