@@ -1,9 +1,7 @@
 #!/usr/bin/env python3
 
 # Pure python ENV variable leak PoC for CVE-2021-44228
-# Original PoC: https://twitter.com/Black2Fan/status/1470281005038817284
-#
-# 2021 @leonjza
+
 
 import argparse
 import signal
