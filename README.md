@@ -12,6 +12,12 @@ put marshalsec-0.0.3-SNAPSHOT-all.jar in target folder
 
 extract java file and ensure in same directory as poc.py or exploit wont work
 
+#Run with docker composer 
+sudo docker-compose build 
+sudo docker-compose up -d 
+
+
+#Run without docker composer
 docker network create --subnet=172.18.0.0/16 companyABC
 
 sudo docker run --net companyABC--ip 172.18.0.22 log4j-shell-poc 
