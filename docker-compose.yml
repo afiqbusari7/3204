@@ -1,0 +1,13 @@
+version: '3.5'
+
+services:
+  sshworkstation:
+    build:
+      context: .
+      dockerfile: DockerfileSSH
+    networks:
+      log4j:
+
+networks:
+  log4j:
+    driver: bridge
