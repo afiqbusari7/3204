@@ -3,14 +3,24 @@ FROM ubuntu:22.04
 #Update package list and install
 RUN apt-get update && \
     apt-get install -y \
-    openssh-server \
+    curl \
     vsftpd \
     ftp
 
-RUN service ssh start
+#Packetbeat installation
+RUN curl -L -O https://artifacts.elastic.co/downloads/beats/packetbeat/packetbeat-8.4.3-amd64.deb
+RUN dpkg -i packetbeat-8.4.3-amd64.deb
+
+#Filebeat installation
+RUN curl -L -O https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-8.4.3-amd64.deb
+RUN dpkg -i filebeat-8.4.3-amd64.deb
+
+#Auditbeat installation
+RUN curl -L -O https://artifacts.elastic.co/downloads/beats/auditbeat/auditbeat-8.4.3-amd64.deb
+RUN dpkg -i auditbeat-8.4.3-amd64.deb
+
 RUN service vsftpd start
 
-EXPOSE 22
 EXPOSE 3001:21
 
 ARG FTPUSER=ross
@@ -37,7 +47,5 @@ RUN echo "local_enable=YES" >> /etc/vsftpd.conf
 RUN echo "write_enable=YES" >> /etc/vsftpd.conf
 RUN echo "chroot_local_user=YES" >> /etc/vsftpd.conf
 RUN echo "allow_writeable_chroot=YES" >> /etc/vsftpd.conf
-
-
 
 CMD ["/bin/sh","-c","service vsftpd start"]
