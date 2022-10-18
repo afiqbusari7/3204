@@ -21,7 +21,8 @@ ADD target/root.war /usr/local/tomcat/webapps/ROOT.war
 
 #ADD catalina.sh /usr/local/tomcat/
 
-
+ADD filebeat.yml /etc/filebeat/filebeat.yml
+ADD server.xml /usr/local/tomcat/conf/server.xml
 
 EXPOSE 8080 
 
