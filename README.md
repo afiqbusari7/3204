@@ -106,11 +106,12 @@ Just a reminder, win32crypt can't be installed in linux, so I have made seperate
 ## Now, we are all set, but how to use this scripts ?
 
 At first move the rev_shell.py script to the trgt machine, linux or windows (above 7).
-Then back in the attacker machine, run the server script:
+Then back in the attacker machine, edit the server's port (line 553) if you wish to (Default port: 1234). Then, run the server script:
 ```
 $ python3 server.py
 ```
-Then server will keep on listening for connection. Start the rev_shell.py on the victim machine:
+Then server will keep on listening for connection.
+Edit the rev_shell.py to connect to the server's IP and port (line 348). Start the rev_shell.py on the victim machine:
 ```
 $ python3 rev_shell.py
 ```
