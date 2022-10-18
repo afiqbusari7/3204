@@ -26,7 +26,6 @@ RUN curl -L -O https://artifacts.elastic.co/downloads/beats/auditbeat/auditbeat-
 RUN dpkg -i auditbeat-8.4.3-amd64.deb
 
 
-
 RUN rm -rf /usr/local/tomcat/webapps/*
 
 ADD target/root.war /usr/local/tomcat/webapps/ROOT.war
@@ -34,6 +33,7 @@ ADD target/root.war /usr/local/tomcat/webapps/ROOT.war
 #ADD catalina.sh /usr/local/tomcat/
 
 ADD filebeat.yml /etc/filebeat/filebeat.yml
+ADD packetbeat.yml /etc/packetbeat/packetbeat.yml
 ADD server.xml /usr/local/tomcat/conf/server.xml
 
 EXPOSE 8080 
