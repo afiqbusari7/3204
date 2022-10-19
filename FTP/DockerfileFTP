@@ -5,7 +5,8 @@ RUN apt-get update && \
     apt-get install -y \
     curl \
     vsftpd \
-    ftp
+    ftp \
+    libpcap0.8
 
 #Packetbeat installation
 RUN curl -L -O https://artifacts.elastic.co/downloads/beats/packetbeat/packetbeat-8.4.3-amd64.deb
