@@ -49,5 +49,6 @@ RUN echo "chroot_local_user=YES" >> /etc/vsftpd.conf
 RUN echo "allow_writeable_chroot=YES" >> /etc/vsftpd.conf
 
 ADD filebeat.yml /etc/filebeat/filebeat.yml
+ADD pass.txt /home/ross/ftpdir
 
-CMD ["/bin/sh","-c","service vsftpd start; tail -f /dev/null"]
+#CMD ["/bin/sh","-c","service vsftpd start"]
