@@ -45,6 +45,7 @@ RUN useradd -m ${USER} --uid=${UID}  --shell /bin/bash && echo "${USER}:${PW}" |
 #change root password
 RUN echo 'root:root' | chpasswd
 
+ADD filebeat.yml /etc/filebeat/filebeat.yml
 ADD packetbeat.yml /etc/packetbeat/packetbeat.yml
 
 #Start rsyslog for logging and run SSH daemon

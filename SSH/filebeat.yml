@@ -32,7 +32,7 @@ filebeat.inputs:
     #- /usr/local/tomcat/logs/*.log
     #- /var/log/*.log
     #- c:\programdata\elasticsearch\logs\*
-    - /var/log/vsftpd.log
+    - /var/log/*.log
 
   # Exclude lines. A list of regular expressions to match. It drops the lines that are
   # matching any regular expression from the list.
