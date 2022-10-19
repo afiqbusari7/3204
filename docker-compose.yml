@@ -2,30 +2,6 @@ version: '3.9'
 
 services:
 
-  webapp:
-    build:
-      context: Web/
-      dockerfile: DockerfileWeb
-    ports:
-      - "8080:8080"
-    networks:
-      companyABC:
-        ipv4_address: 172.16.0.2
-  ftpserver:
-    build:
-      context: FTP/
-      dockerfile: DockerfileFTP
-    networks:
-      companyABC:
-        ipv4_address: 172.16.0.3
-  sshworkstation:
-    build:
-      context: SSH/
-      dockerfile: DockerfileSSH
-    networks:
-      companyABC:
-        ipv4_address: 172.16.0.4
-    
   # The 'setup' service runs a one-off script which initializes the
   # 'logstash_internal' and 'kibana_system' users inside Elasticsearch with the
   # values of the passwords defined in the '.env' file.
@@ -115,6 +91,32 @@ services:
         ipv4_address: 172.16.0.7
     depends_on:
       - elasticsearch
+      
+  webapp:
+    build:
+      context: Web/
+      dockerfile: DockerfileWeb
+    ports:
+      - "8080:8080"
+    networks:
+      companyABC:
+        ipv4_address: 172.16.0.2
+      
+  ftpserver:
+    build:
+      context: FTP/
+      dockerfile: DockerfileFTP
+    networks:
+      companyABC:
+        ipv4_address: 172.16.0.3
+        
+  sshworkstation:
+    build:
+      context: SSH/
+      dockerfile: DockerfileSSH
+    networks:
+      companyABC:
+        ipv4_address: 172.16.0.4
       
 networks:
   companyABC:

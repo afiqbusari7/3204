@@ -6,7 +6,8 @@ RUN apt-get update && \
     openssh-server \
     rsyslog \
     libpcap0.8 \
-    curl
+    curl \
+	libpcap0.8
 
 ADD /placeholder.txt /home/bob
 
