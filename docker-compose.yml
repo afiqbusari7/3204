@@ -6,8 +6,28 @@ services:
     ports:
       - "8080:8080"
     networks:
-      - companyABC
+      companyABC:
+        ipv4_address: 172.16.0.2
+  ftpserver:
+    build:
+      context: FTP/
+      dockerfile: DockerfileFTP
+    networks:
+      companyABC:
+        ipv4_address: 172.16.0.3
+  sshworkstation:
+    build:
+      context: SSH/
+      dockerfile: DockerfileSSH
+    networks:
+      companyABC:
+        ipv4_address: 172.16.0.4
+    
 
 networks:
   companyABC:
     driver: bridge
+    ipam:
+      config:
+        - subnet: 172.16.0.0/16
+          gateway: 172.16.0.1

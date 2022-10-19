@@ -1,0 +1,53 @@
+FROM ubuntu:22.04
+
+#Update package list and install
+RUN apt-get update && \
+    apt-get install -y \
+    curl \
+    vsftpd \
+    ftp
+
+#Packetbeat installation
+RUN curl -L -O https://artifacts.elastic.co/downloads/beats/packetbeat/packetbeat-8.4.3-amd64.deb
+RUN dpkg -i packetbeat-8.4.3-amd64.deb
+
+#Filebeat installation
+RUN curl -L -O https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-8.4.3-amd64.deb
+RUN dpkg -i filebeat-8.4.3-amd64.deb
+
+#Auditbeat installation
+RUN curl -L -O https://artifacts.elastic.co/downloads/beats/auditbeat/auditbeat-8.4.3-amd64.deb
+RUN dpkg -i auditbeat-8.4.3-amd64.deb
+
+RUN service vsftpd start
+
+EXPOSE 3001:21
+
+ARG FTPUSER=ross
+ARG FTPUID=4000
+ARG FTPGIP=4000
+
+# default password for user
+ARG FTPPW=joyofpainting
+
+# Using unencrypted password/ specifying password
+RUN useradd -m ${FTPUSER} --uid=${FTPUID}  --shell /bin/bash && echo "${FTPUSER}:${FTPPW}" | chpasswd
+
+#change root password
+RUN echo 'root:root' | chpasswd
+
+#FTP
+RUN mkdir -p /home/ross/ftpdir
+RUN chmod -R 755 /home/ross/ftpdir
+COPY --chown=ross:ross . /home/ross/ftpdir
+USER root
+RUN echo "ross" >> /etc/vsftpd.user_list
+RUN echo "anonymous_enable=NO" >> /etc/vsftpd.conf
+RUN echo "local_enable=YES" >> /etc/vsftpd.conf
+RUN echo "write_enable=YES" >> /etc/vsftpd.conf
+RUN echo "chroot_local_user=YES" >> /etc/vsftpd.conf
+RUN echo "allow_writeable_chroot=YES" >> /etc/vsftpd.conf
+
+ADD filebeat.yml /etc/filebeat/filebeat.yml
+
+CMD ["/bin/sh","-c","service vsftpd start; tail -f /dev/null"]
