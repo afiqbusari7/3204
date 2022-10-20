@@ -9,7 +9,7 @@ RUN apt-get update && \
     curl \
 	libpcap0.8
 
-ADD /placeholder.txt /home/bob
+ADD /Company_Accounts.xlsx /home/bob
 
 
 #Packetbeat installation
