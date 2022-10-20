@@ -88,7 +88,7 @@ packetbeat.protocols:
   # the Redis protocol by commenting out the list of ports.
   ports: [6379]
 
-  type: ftp
+- type: ftp
   # Configure the ports where to listen for FTP traffic. You can disable
   # the FTP protocol by commenting out the list of ports.
   ports: [21]
@@ -200,7 +200,7 @@ setup.kibana:
 # ---------------------------- Elasticsearch Output ----------------------------
 output.elasticsearch:
   # Array of hosts to connect to.
-  hosts: [""172.16.0.5:9200""]
+  hosts: ["172.16.0.5:9200"]
 
   # Protocol - either `http` (default) or `https`.
   #protocol: "https"
