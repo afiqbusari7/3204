@@ -1,0 +1,5 @@
+FTP Credentials
+
+IP: 172.16.0.3
+User: ross
+Pwd: joyofpainting

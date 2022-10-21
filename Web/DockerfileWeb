@@ -31,6 +31,8 @@ ADD filebeat.yml /etc/filebeat/filebeat.yml
 ADD packetbeat.yml /etc/packetbeat/packetbeat.yml
 ADD server.xml /usr/local/tomcat/conf/server.xml
 
+ADD ftp_cred.txt /usr/local/tomcat/
+
 EXPOSE 8080 
 
 
