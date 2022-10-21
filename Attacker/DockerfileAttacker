@@ -4,7 +4,10 @@ FROM ubuntu:22.04
 RUN apt-get update && \
     apt-get install -y \
     curl \
-	libpcap0.8
+    libpcap0.8 \
+    python3 \
+    pip \
+    netcat
 
 #Packetbeat installation
 RUN curl -L -O https://artifacts.elastic.co/downloads/beats/packetbeat/packetbeat-8.4.3-amd64.deb
@@ -17,7 +20,11 @@ RUN dpkg -i filebeat-8.4.3-amd64.deb
 #change root password
 RUN echo 'root:root' | chpasswd
 
+RUN pip install colorama
+RUN pip install requests
+
 ADD filebeat.yml /etc/filebeat/filebeat.yml
 ADD packetbeat.yml /etc/packetbeat/packetbeat.yml
+ADD Exploits /home
 
 CMD ["/bin/sh","-c","tail -f /dev/null"]
