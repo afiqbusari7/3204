@@ -3,12 +3,8 @@ FROM ubuntu:22.04
 #Update package list and install required packages
 RUN apt-get update && \
     apt-get install -y \
-    openssh-server \
-    rsyslog \
     curl \
 	libpcap0.8
-
-
 
 #Packetbeat installation
 RUN curl -L -O https://artifacts.elastic.co/downloads/beats/packetbeat/packetbeat-8.4.3-amd64.deb
@@ -18,15 +14,10 @@ RUN dpkg -i packetbeat-8.4.3-amd64.deb
 RUN curl -L -O https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-8.4.3-amd64.deb
 RUN dpkg -i filebeat-8.4.3-amd64.deb
 
-#Start SSH service and expose port
-RUN service ssh start
-EXPOSE 22
-
 #change root password
 RUN echo 'root:root' | chpasswd
 
 ADD filebeat.yml /etc/filebeat/filebeat.yml
 ADD packetbeat.yml /etc/packetbeat/packetbeat.yml
 
-#Start rsyslog for logging and run SSH daemon
-CMD ["/bin/sh","-c","rsyslogd; /usr/sbin/sshd -D"]
+CMD ["/bin/sh","-c","tail -f /dev/null"]
