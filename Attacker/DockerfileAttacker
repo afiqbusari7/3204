@@ -8,7 +8,6 @@ RUN apt-get update && \
     curl \
 	libpcap0.8
 
-ADD /Company_Accounts.xlsx /home/bob
 
 
 #Packetbeat installation
@@ -22,20 +21,6 @@ RUN dpkg -i filebeat-8.4.3-amd64.deb
 #Start SSH service and expose port
 RUN service ssh start
 EXPOSE 22
-
-
-
-ARG USER=bob
-ARG UID=1000
-ARG GID=1000
-
-# default password for user
-ARG PW=d0ck3r
-
-
-# Using unencrypted password/ specifying password
-RUN useradd -m ${USER} --uid=${UID}  --shell /bin/bash && echo "${USER}:${PW}" | \
-     chpasswd
 
 #change root password
 RUN echo 'root:root' | chpasswd

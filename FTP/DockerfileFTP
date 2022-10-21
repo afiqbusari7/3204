@@ -16,10 +16,6 @@ RUN dpkg -i packetbeat-8.4.3-amd64.deb
 RUN curl -L -O https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-8.4.3-amd64.deb
 RUN dpkg -i filebeat-8.4.3-amd64.deb
 
-#Auditbeat installation
-RUN curl -L -O https://artifacts.elastic.co/downloads/beats/auditbeat/auditbeat-8.4.3-amd64.deb
-RUN dpkg -i auditbeat-8.4.3-amd64.deb
-
 RUN service vsftpd start
 
 EXPOSE 3001:21
