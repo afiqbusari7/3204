@@ -31,7 +31,7 @@ filebeat.inputs:
   paths:
     - /var/log/apt/*.log
     - /var/log/*.log
-    - /src/john/run/john.pot
+    - /root/src/john/run/john.pot
 
   # Exclude lines. A list of regular expressions to match. It drops the lines that are
   # matching any regular expression from the list.
