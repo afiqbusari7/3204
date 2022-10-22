@@ -7,7 +7,8 @@ RUN apt-get update && \
     libpcap0.8 \
     python3 \
     pip \
-    netcat
+    netcat \
+    ftp
 
 #Packetbeat installation
 RUN curl -L -O https://artifacts.elastic.co/downloads/beats/packetbeat/packetbeat-8.4.3-amd64.deb
