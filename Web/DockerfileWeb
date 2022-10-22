@@ -33,6 +33,10 @@ ADD server.xml /usr/local/tomcat/conf/server.xml
 
 ADD ftp_cred.txt /usr/local/tomcat/
 
+
+ADD attacker.sh /usr/local/tomcat/
+
+
 EXPOSE 8080 
 
 

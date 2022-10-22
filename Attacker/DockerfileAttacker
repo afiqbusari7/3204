@@ -8,7 +8,12 @@ RUN apt-get update && \
     python3 \
     pip \
     netcat \
-    ftp
+    nmap \
+    git \
+    build-essential \
+    libssl-dev \
+    ftp \
+    openssh-server
 
 #Packetbeat installation
 RUN curl -L -O https://artifacts.elastic.co/downloads/beats/packetbeat/packetbeat-8.4.3-amd64.deb
@@ -20,6 +25,15 @@ RUN dpkg -i filebeat-8.4.3-amd64.deb
 
 #change root password
 RUN echo 'root:root' | chpasswd
+
+#install john 
+RUN git clone https://github.com/openwall/john.git -b bleeding-jumbo ~/src/john
+
+RUN mkdir ~/.ssh
+ADD id_rsa ~/.ssh
+ADD id_rsa.pub ~/.ssh
+
+
 
 RUN pip install colorama
 RUN pip install requests
