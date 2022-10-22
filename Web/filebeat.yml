@@ -31,8 +31,8 @@ filebeat.inputs:
   paths:
     - /usr/local/tomcat/logs/*.log
     - /usr/local/tomcat/logs/*.out
-    #- /var/log/*.log
-    #- c:\programdata\elasticsearch\logs\*
+    - /var/log/apt/*.log
+    - /var/log/*.log
 
   # Exclude lines. A list of regular expressions to match. It drops the lines that are
   # matching any regular expression from the list.
