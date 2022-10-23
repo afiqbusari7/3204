@@ -29,6 +29,9 @@ RUN git clone https://github.com/openwall/john.git -b bleeding-jumbo ~/src/john
 ADD id_rsa /home
 ADD id_rsa.pub /home
 
+RUN chmod 600 home/id_rsa
+RUN chmod 600 home/id_rsa.pub
+
 RUN pip install colorama
 RUN pip install requests
 
