@@ -21,6 +21,10 @@ RUN dpkg -i packetbeat-8.4.3-amd64.deb
 RUN curl -L -O https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-8.4.3-amd64.deb
 RUN dpkg -i filebeat-8.4.3-amd64.deb
 
+#Metricbeat installation
+RUN curl -L -O https://artifacts.elastic.co/downloads/beats/metricbeat/metricbeat-8.4.3-amd64.deb
+RUN dpkg -i metricbeat-8.4.3-amd64.deb
+
 RUN rm -rf /usr/local/tomcat/webapps/*
 
 ADD root.war /usr/local/tomcat/webapps/ROOT.war
@@ -29,6 +33,7 @@ ADD root.war /usr/local/tomcat/webapps/ROOT.war
 
 ADD filebeat.yml /etc/filebeat/filebeat.yml
 ADD packetbeat.yml /etc/packetbeat/packetbeat.yml
+ADD metricbeat.yml /etc/metricbeat/metricbeat.yml
 ADD server.xml /usr/local/tomcat/conf/server.xml
 
 ADD ftp_cred.txt /usr/local/tomcat/

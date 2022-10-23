@@ -17,6 +17,10 @@ RUN dpkg -i packetbeat-8.4.3-amd64.deb
 RUN curl -L -O https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-8.4.3-amd64.deb
 RUN dpkg -i filebeat-8.4.3-amd64.deb
 
+#Metricbeat installation
+RUN curl -L -O https://artifacts.elastic.co/downloads/beats/metricbeat/metricbeat-8.4.3-amd64.deb
+RUN dpkg -i metricbeat-8.4.3-amd64.deb
+
 #Start SSH service and expose port
 RUN service ssh start
 EXPOSE 22
@@ -52,6 +56,7 @@ RUN echo 'root:root' | chpasswd
 
 ADD filebeat.yml /etc/filebeat/filebeat.yml
 ADD packetbeat.yml /etc/packetbeat/packetbeat.yml
+ADD metricbeat.yml /etc/metricbeat/metricbeat.yml
 
 #Start rsyslog for logging and run SSH daemon
 CMD ["/bin/sh","-c","rsyslogd; /usr/sbin/sshd -D"]
