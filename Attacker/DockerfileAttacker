@@ -23,17 +23,11 @@ RUN dpkg -i packetbeat-8.4.3-amd64.deb
 RUN curl -L -O https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-8.4.3-amd64.deb
 RUN dpkg -i filebeat-8.4.3-amd64.deb
 
-#change root password
-RUN echo 'root:root' | chpasswd
-
 #install john 
 RUN git clone https://github.com/openwall/john.git -b bleeding-jumbo ~/src/john
 
-RUN mkdir ~/.ssh
-ADD id_rsa ~/.ssh
-ADD id_rsa.pub ~/.ssh
-
-
+ADD id_rsa /home
+ADD id_rsa.pub /home
 
 RUN pip install colorama
 RUN pip install requests
@@ -41,5 +35,9 @@ RUN pip install requests
 ADD filebeat.yml /etc/filebeat/filebeat.yml
 ADD packetbeat.yml /etc/packetbeat/packetbeat.yml
 ADD Exploits /home
+
+#change root password
+RUN echo 'root:root' | chpasswd
+
 
 CMD ["/bin/sh","-c","tail -f /dev/null"]
