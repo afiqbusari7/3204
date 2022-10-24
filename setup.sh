@@ -4,7 +4,7 @@
 sudo docker-compose build
 sudo docker-compose up -d
 
-sleep 1m
+sleep 5m
 
 # Start log monitoring
 sudo docker exec 3204_sshworkstation_1 /bin/bash -c "chmod go-w /etc/filebeat/filebeat.yml"
