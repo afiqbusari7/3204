@@ -2,7 +2,7 @@
 import pandas as pd
 
 # read file
-data = pd.read_csv(r'D:\Documents\SIT Stuff\Y3T1\3204\Cleaning\T1110.002 _ Filebeat _ raw _ Grp12.csv')
+data = pd.read_csv('T1110.002 _ Filebeat _ raw _ Grp12.csv')
 
 # display
 print("Modifying CSV Data\n")
@@ -22,7 +22,7 @@ data.drop(['_id','_index','_score','agent.ephemeral_id',
 data.drop(data.columns[data.columns.str.contains('unnamed',case = False)],axis = 1, inplace = True)
 
 #save file
-data.to_csv(r'D:\Documents\SIT Stuff\Y3T1\3204\Cleaning\T1110.002 _ Filebeat _ clean _ Grp12.csv',index=False)
+data.to_csv('T1110.002 _ Filebeat _ clean _ Grp12.csv',index=False)
 
 # display
 print("Done")
